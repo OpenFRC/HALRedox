@@ -1,7 +1,5 @@
 # HALRedox
 
-[![Github Forks](https://img.shields.io/github/forks/OpenFRC/HalRedux.svg?style=flat-square)](https://github.com/OpenFRC/HalRedux)
-
 [![Github Stars](https://img.shields.io/github/stars/OpenFRC/HalRedux.svg?style=flat-square)](https://github.com/OpenFRC/HalRedux)
 
 
