@@ -1,9 +1,8 @@
 use std::env;
-
-extern crate gcc;
-
+use std::process::Command;
 fn main() {
-    //gcc::compile_library("../lib/ni-wrapper/libNiWrapper.so", &["../cpp/"])
+    Command::new("make").arg("-C").arg("../cpp/wrapper").arg("arm").output();
+
     if env::var("TARGET").unwrap() == "arm-unknown-linux-gnueabi" {
         for lib in ["NiFpga",
                     "NiFpgaLv"].iter()
@@ -11,5 +10,8 @@ fn main() {
             println!("cargo:rustc-link-lib=dylib={}", lib);
         }
         println!("cargo:rustc-link-search=native=lib/ni-libraries");
+        println!("cargo:rustc-link-search=native=../lib/ni-libraries");
+
+
     }
 }
