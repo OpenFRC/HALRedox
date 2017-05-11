@@ -48,10 +48,10 @@ script:
   - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo rustc --verbose --target=arm-unknown-linux-gnueabi && cd ../
 
 after_success:
-  - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
-  - tar xzf master.tar.gz && mkdir kcov-master/build && cd kcov-master/build &&
-  - cmake -DCMAKE_INSTALL_PREFIX:PATH=$LOCAL .. && make &&
-  - make install && cd ../.. &&
+  - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+  - tar xzf master.tar.gz && mkdir kcov-master/build && cd kcov-master/build
+  - cmake -DCMAKE_INSTALL_PREFIX:PATH=$LOCAL .. && make
+  - make install && cd ../..
   - for file in target/debug/libhalredox.rlib; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file";
   - bash <(curl -s https://codecov.io/bash) &&
   - echo "Uploaded code coverage"
