@@ -98,8 +98,9 @@ impl CommandSender {
     pub fn run<C: Command + Send + 'static>(&self, command: C) -> Result<CommandFuture<C>> {
         let (sender, future) = oneshot::channel();
         match self.send.send(CommandWithReturn::new(move |hardware: &mut HardwareContext| {
-            sender.complete(command.execute(hardware));
-        })) {
+            sender.send(command.execute(hardware));
+        }))
+        {
             Ok(_) => Ok(CommandFuture(future)),
             Err(_) => Err(ErrorKind::HardwareThreadCrashed.into())
         }
@@ -148,9 +149,9 @@ mod test {
             Ok(43)
         }
     }
-    
+
     struct DummyErrorCommand;
-    
+
     impl Command for DummyErrorCommand {
         type Output = u32;
 
@@ -165,7 +166,7 @@ mod test {
         let future = sender.run(DummyCommand).unwrap();
         assert_eq!(future.wait().unwrap(), 42);
     }
-    
+
     #[test]
     fn async_commands_errors() {
         let sender = spawn_hardware_thread();
@@ -182,4 +183,3 @@ mod test {
         assert_eq!(future_slow.wait().unwrap(), 43);
     }
 }
-

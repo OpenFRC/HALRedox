@@ -44,7 +44,7 @@ matrix:
 #  - cargo install cargo-travis && export PATH=$HOME/.cargo/bin:$PATH
 
 script:
-  - cd frcredox; cargo rustc --verbose -- -D warnings; cargo coverage && cd ../
+  - cd frcredox; cargo rustc --verbose
   - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo rustc --verbose --target=arm-unknown-linux-gnueabi -- -D warnings && cd ../
 
 after_success:
