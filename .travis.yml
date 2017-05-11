@@ -40,14 +40,14 @@ matrix:
   allow_failures:
     - rust: nightly
 
-before_script:
-  - cargo install cargo-travis && export PATH=$HOME/.cargo/bin:$PATH
+#before_script:
+#  - cargo install cargo-travis && export PATH=$HOME/.cargo/bin:$PATH
 
 script:
   - cd frcredox; cargo rustc --verbose -- -D warnings; cargo coverage && cd ../
   - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo rustc --verbose --target=arm-unknown-linux-gnueabi -- -D warnings && cd ../
 
 after_success:
-  - for file in target/debug/networktablesredox-*[^\.d]; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
+  - for file in target/debug/networktablesredox-*[^\.d]; do mkdir -p "target/cov/$(basename $file)"; kcov --exclude-pattern=/.cargo,/usr/lib "target/cov/$(basename $file)" "$file"; done &&
   - bash <(curl -s https://codecov.io/bash) &&
   - echo "Uploaded code coverage"
