@@ -25,13 +25,13 @@ extern {
 	pub fn tPWM__writePeriodScaleMXP(bitfield_index: c_uchar, value: c_ushort, status: RioStatusPointer, This: PWMPointer);
 }
 
-pub fn writeConfig_Period(value: c_ushort, This: PWMPointer) {
+pub fn writeConfig_Period(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
 	let status: RioStatusPointer;
 	tPWM__writeConfig_Period(value, status, This);
 	return status;
 
 }
-pub fn writeConfig_MinHigh(value: c_ushort, This: PWMPointer) {
+pub fn writeConfig_MinHigh(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
 	let status: RioStatusPointer;
 	tPWM__writeConfig_MinHigh(value, status, This);
 	return status;
