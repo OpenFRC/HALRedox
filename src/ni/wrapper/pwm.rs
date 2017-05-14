@@ -25,7 +25,7 @@ struct PWMWriteConfigPeriod {
 impl commands::CommandCommandFuturefor PWMWriteConfigPeriod {
     type Output = fpga_wrapper::RioStatusPointer;
     fn execute(self, _: &mut commands::HardwareContext) -> Result<u32> {
-        Ok(pwm::writeConfig_Period(value, tPWM))
+        Ok(pwm::writeConfig_Period(self.value, self.tPWM))
     }
 }
 
@@ -38,7 +38,7 @@ struct PWMWriteConfigMinHigh{
 impl commands::Command for PWMWriteConfigPeriod {
     type Output = fpga_wrapper::RioStatusPointer;
     fn execute(self, _: &mut commands::HardwareContext) -> Result<u32> {
-        Ok(pwm::writeConfig_MinHighd(value, tPWM))
+        Ok(pwm::writeConfig_MinHighd(self.value, self.tPWM))
     }
 }
 
@@ -56,7 +56,7 @@ impl PWM {
         }
     }
     pub fn writeConfigPeriod(value: c_ushort) -> fpga_types::NiFpga_Status {
-        let status_future = sender.run(PWMWriteConfigPeriod(c_ushort, pwm_reference));
+        let status_future = sender.run(PWMWriteConfigPeriod(self.value, self.pwm_reference));
         return status_future.wait();
     }
 }
