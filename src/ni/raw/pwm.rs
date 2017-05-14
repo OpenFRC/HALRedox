@@ -2,7 +2,7 @@ use std::os::raw::{c_void, c_ushort, c_uchar};
 use ni::raw::fpga::fpga_wrapper::RioStatusPointer;
 use ni::raw::fpga::fpga_types;
 
-#[repr(c_void)]
+//#[repr(c_void)]
 struct tPWM;
 
 struct PWMPointer(*mut tPWM);
