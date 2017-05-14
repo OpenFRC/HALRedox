@@ -27,14 +27,14 @@ extern {
 }
 
 pub fn writeConfig_Period(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
-	let success_code: tRioStatusCode = 0;
+	let mut tsuccess_code: tRioStatusCode = 0;
 	let status: RioStatusPointer = &mut success_code;
 	unsafe{tPWM__writeConfig_Period(value, status, This);}
 	return status;
 
 }
 pub fn writeConfig_MinHigh(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
-	let success_code: tRioStatusCode = 0;
+	let mut success_code: tRioStatusCode = 0;
 	let status: RioStatusPointer = &mut success_code;
 	unsafe{tPWM__writeConfig_MinHigh(value, status, This);}
 	return status;
