@@ -3,4 +3,4 @@
          non_upper_case_globals)]
 
 pub mod fpga;
-pub mod pmw;
+pub mod pwm;
