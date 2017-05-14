@@ -42,7 +42,7 @@ matrix:
 
 before_script:
   - pip install 'travis-cargo' && export PATH=$HOME/.local/bin:$PATH && export PATH=$HOME/.cargo/bin:$PATH
-
+  - make -C cpp/wrapper arm
 script:
   - cd frcredox; cargo build --verbose
   - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo build --verbose --target=arm-unknown-linux-gnueabi && cd ../

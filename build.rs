@@ -1,7 +1,6 @@
 use std::env;
 use std::process::Command;
 fn main() {
-    Command::new("make").arg("-C").arg("cpp/wrapper").arg("arm").output();
 
     if env::var("TARGET").unwrap() == "arm-unknown-linux-gnueabi" {
         for lib in ["NiFpga",
@@ -9,6 +8,8 @@ fn main() {
         {
             println!("cargo:rustc-link-lib=dylib={}", lib);
         }
+        Command::new("make").arg("-C").arg("cpp/wrapper").arg("arm").output();
+        
         println!("cargo:rustc-link-search=native=lib/ni-libraries");
         println!("cargo:rustc-link-search=native=lib/ni-wrapper");
 
