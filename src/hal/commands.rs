@@ -111,6 +111,8 @@ impl CommandSender {
 ///
 /// This will return a `CommandSender` for communicating with the hardware thread, which can be
 /// cloned any number of times.
+///
+/// TODO: Have method check if is running; a "Get Status" method
 pub fn spawn_hardware_thread() -> CommandSender {
     let (tx_command, rx_command) = channel::<CommandWithReturn>();
     thread::spawn(move || {

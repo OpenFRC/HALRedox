@@ -2,6 +2,7 @@ use ni::raw::fpga::fpga_types;
 
 pub const NiFpga_False: fpga_types::NiFpga_Bool = 0;
 pub const NiFpga_True: fpga_types::NiFpga_Bool = 1;
+pub const NiFpga_Status_Success: fpga_types::NiFpga_Status = 0;
 pub const NiFpga_Status_FifoTimeout: fpga_types::NiFpga_Status = -50400;
 pub const NiFpga_Status_TransferAborted: fpga_types::NiFpga_Status = -50405;
 pub const NiFpga_Status_MemoryFull: fpga_types::NiFpga_Status = -52000;
