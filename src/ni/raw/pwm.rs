@@ -5,7 +5,7 @@ use ni::raw::fpga::fpga_types;
 //#[repr(c_void)]
 struct tPWM;
 
-struct PWMPointer(*mut tPWM);
+pub struct PWMPointer(*mut tPWM);
 
 extern {
 	pub fn tPWM__new() -> PWMPointer;
@@ -27,13 +27,13 @@ extern {
 
 pub fn writeConfig_Period(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
 	let status: RioStatusPointer;
-	tPWM__writeConfig_Period(value, status, This);
+	unsafe{tPWM__writeConfig_Period(value, status, This);}
 	return status;
 
 }
 pub fn writeConfig_MinHigh(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
 	let status: RioStatusPointer;
-	tPWM__writeConfig_MinHigh(value, status, This);
+	unsafe{tPWM__writeConfig_MinHigh(value, status, This);}
 	return status;
 
 }

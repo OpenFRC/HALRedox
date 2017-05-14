@@ -13,7 +13,7 @@ impl commands::Command for PWMCreate {
     type Output = *pwm::tPWM;
 
     fn execute(self, _: &mut commands::HardwareContext) -> Result<u32> {
-        Ok(pwm::tPWM__create(fpga_constants::NiFpga_Status_Success));
+        Ok(unsafe{pwm::tPWM__create(fpga_constants::NiFpga_Status_Success)});
     }
 }
 
