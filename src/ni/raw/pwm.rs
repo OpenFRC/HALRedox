@@ -1,5 +1,6 @@
 use std::os::raw::{c_void, c_ushort, c_uchar};
 use ni::raw::fpga::fpga_wrapper::RioStatusPointer;
+use ni::raw::fpga::fpga_wrapper::tRioStatusCode;
 use ni::raw::fpga::fpga_types;
 
 //#[repr(c_void)]
@@ -26,13 +27,15 @@ extern {
 }
 
 pub fn writeConfig_Period(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
-	let status: RioStatusPointer;
+	let success_code: tRioStatusCode = 0;
+	let status: RioStatusPointer = &success_code;
 	unsafe{tPWM__writeConfig_Period(value, status, This);}
 	return status;
 
 }
 pub fn writeConfig_MinHigh(value: c_ushort, This: PWMPointer) -> RioStatusPointer{
-	let status: RioStatusPointer;
+	let success_code: tRioStatusCode = 0;
+	let status: RioStatusPointer = &success_code;
 	unsafe{tPWM__writeConfig_MinHigh(value, status, This);}
 	return status;
 
