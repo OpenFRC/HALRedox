@@ -44,8 +44,8 @@ before_script:
   - pip install 'travis-cargo' && export PATH=$HOME/.local/bin:$PATH && export PATH=$HOME/.cargo/bin:$PATH
 
 script:
-  - cd frcredox; cargo rustc --verbose
-  - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo rustc --verbose --target=arm-unknown-linux-gnueabi && cd ../
+  - cd frcredox; cargo build --verbose
+  - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo build --verbose --target=arm-unknown-linux-gnueabi && cd ../
 
 after_success:
   - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
