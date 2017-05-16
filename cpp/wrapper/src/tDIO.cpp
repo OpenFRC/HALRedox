@@ -1,11 +1,13 @@
+#include <memory>
+
 #include "include/nRoboRIO_FPGANamespace/tDIO.h"
 
-using nFPGA;
-using nFPGA::nFRC_2017_17_0_2;
+using namespace nFPGA;
+using namespace nFPGA::nFRC_2017_17_0_2;
 
 extern "C" {
 
-    static tDIO* tDIO__create(tRioSTatusCode *status) {
+    static tDIO* tDIO__create(tRioStatusCode *status) {
         return tDIO::create(status);
     }
 }

@@ -9,10 +9,10 @@ use std::os::raw::{c_void, c_ushort, c_uchar};
 
 struct PwmCreate;
 
-impl commands::Command for PwmCreate {
-    type Output = *pwm::tPwm;
+impl Command for PwmCreate {
+    type Output = pwm::PwmPointer;
 
-    fn execute(self, _: &mut commands::HardwareContext) -> Result<u32> {
+    fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(unsafe{pwm::tPwm__create(fpga_constants::NiFpga_Status_Success)});
     }
 }
@@ -22,7 +22,7 @@ struct PwmWriteConfigPeriod {
     pwm_object: PwmPointer;
 }
 
-impl commands::CommandCommandFuturefor PwmWriteConfigPeriod {
+impl Command for PwmWriteConfigPeriod {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writeConfig_Period(self.value, self.tPwm))
@@ -35,7 +35,7 @@ struct PwmWriteConfigMinHigh {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmWriteConfigPeriod {
+impl Command for PwmWriteConfigPeriod {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writeConfig_MinHigh(self.value, self.tPwm))
@@ -46,7 +46,7 @@ struct PwmReadLoopTiming {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmReadLoopTiming {
+impl Command for PwmReadLoopTiming {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::readLoopTiming(self.tPwm))
@@ -59,7 +59,7 @@ struct PwmWriteHdr {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmWriteHdr {
+impl Command for PwmWriteHdr {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writeHdr(self.reg_index, self.value, self.tPwm))
@@ -72,7 +72,7 @@ struct PwmWriteMXP {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmWriteHdr {
+impl Command for PwmWriteHdr {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writeMXP(self.reg_index, self.value, self.tPwm))
@@ -85,7 +85,7 @@ struct PwmWritePeriodScaleHdr {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmWritePeriodScaleHdr {
+impl Command for PwmWritePeriodScaleHdr {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writePeriodScaleHdr(self.bitfield_index, self.value, self.tPwm))
@@ -98,7 +98,7 @@ struct PwmWritePeriodScaleMXP {
     tPwm: PwmPointer;
 }
 
-impl commands::Command for PwmWritePeriodScaleMXP {
+impl Command for PwmWritePeriodScaleMXP {
     type Output = RioStatusPointer;
     fn execute(self, _: &mut HardwareContext) -> Result<u32> {
         Ok(pwm::writePeriodScaleMXP(self.bitfield_index, self.value, self.tPwm))
