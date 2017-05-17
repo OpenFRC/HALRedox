@@ -42,10 +42,10 @@ matrix:
 
 before_script:
   - pip install 'travis-cargo' && export PATH=$HOME/.local/bin:$PATH && export PATH=$HOME/.cargo/bin:$PATH
-  - cd frcredox; make -C cpp/wrapper arm
+  - make -C cpp/wrapper arm
 script:
   - cargo build --verbose
-  - cd frcredox; env CC="arm-frc-linux-gnueabi-gcc" cargo build --verbose --target=arm-unknown-linux-gnueabi && cd ../
+  - env CC="arm-frc-linux-gnueabi-gcc" cargo build --verbose --target=arm-unknown-linux-gnueabi && cd ../
 
 after_success:
   - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
